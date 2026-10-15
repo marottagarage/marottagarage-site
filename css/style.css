@@ -1,0 +1,326 @@
+/* ==========================================================================
+   Marotta Garage Sàrl — feuille de style principale
+   Identité : bleu marine (enseigne), bleu atelier, filet rouge de l'enseigne.
+   ========================================================================== */
+
+:root {
+  --navy: #041d55;         /* bleu marine de la marque */
+  --navy-dark: #020f2e;
+  --blue: #1d4ed8;         /* bleu des portes de l'atelier */
+  --red: #b8372b;          /* filet rouge de l'enseigne */
+  --ink: #0b1220;          /* titres */
+  --text: #273043;         /* texte courant */
+  --muted: #5b6475;
+  --line: #e2e6ee;
+  --soft: #f3f5f9;         /* fonds de section clairs */
+  --white: #ffffff;
+  --radius: 10px;
+  --shadow: 0 10px 30px rgba(4, 29, 85, 0.10);
+  --max: 1160px;
+  --title: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--blue); }
+
+h1, h2, h3 {
+  font-family: var(--title);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+  letter-spacing: 0.01em;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); text-transform: uppercase; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.7rem); text-transform: uppercase; }
+h3 { font-size: 1.45rem; }
+
+p { margin: 0 0 1em; }
+
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--white); color: var(--navy); padding: 10px 16px; z-index: 100;
+}
+.skip-link:focus { left: 10px; top: 10px; }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-family: var(--title);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover { background: #9c2c22; }
+.btn-ghost { border-color: rgba(255, 255, 255, 0.7); color: var(--white); }
+.btn-ghost:hover { background: var(--white); color: var(--navy); }
+.btn-navy { background: var(--navy); color: var(--white); }
+.btn-navy:hover { background: var(--blue); }
+.btn-outline { border-color: var(--navy); color: var(--navy); }
+.btn-outline:hover { background: var(--navy); color: var(--white); }
+
+/* ---------- En-tête ---------- */
+.topbar {
+  background: var(--navy-dark);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+.topbar .container {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding-top: 7px; padding-bottom: 7px;
+}
+.topbar a { color: var(--white); text-decoration: none; }
+.topbar a:hover { text-decoration: underline; }
+
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--navy);
+  border-bottom: 3px solid var(--red);
+}
+.site-header .container {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 76px;
+}
+.logo img { height: 52px; width: auto; }
+
+.nav { display: flex; align-items: center; gap: 6px; }
+.nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--title);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+.nav a:hover { background: rgba(255, 255, 255, 0.1); }
+.nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--red); border-radius: 0; }
+.nav .nav-call { background: var(--red); margin-left: 8px; border-radius: 6px; }
+.nav .nav-call:hover { background: #9c2c22; }
+
+.menu-toggle {
+  display: none;
+  background: none; border: 0; color: var(--white);
+  width: 44px; height: 44px; padding: 10px; cursor: pointer;
+}
+.menu-toggle svg { width: 24px; height: 24px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  color: var(--white);
+  background: var(--navy) url("../images/garage-facade.jpg") center 40% / cover no-repeat;
+  min-height: min(78vh, 680px);
+  display: flex; align-items: center;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(2, 15, 46, 0.92) 0%, rgba(2, 15, 46, 0.7) 45%, rgba(2, 15, 46, 0.15) 100%);
+}
+.hero .container { position: relative; padding-top: 70px; padding-bottom: 70px; }
+.hero h1 { color: var(--white); max-width: 12ch; }
+.hero .kicker {
+  display: inline-block;
+  font-family: var(--title);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-left: 4px solid var(--red);
+  padding-left: 12px;
+  margin-bottom: 18px;
+}
+.hero p.lead { font-size: 1.2rem; max-width: 34rem; color: rgba(255, 255, 255, 0.9); }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+
+.page-hero {
+  position: relative;
+  background: var(--navy) center / cover no-repeat;
+  color: var(--white);
+  padding: 90px 0 70px;
+}
+.page-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(2, 15, 46, 0.92), rgba(2, 15, 46, 0.55));
+}
+.page-hero .container { position: relative; }
+.page-hero h1 { color: var(--white); margin: 0; }
+.page-hero p { margin: 12px 0 0; font-size: 1.15rem; color: rgba(255, 255, 255, 0.88); max-width: 40rem; }
+
+/* ---------- Sections ---------- */
+.section { padding: 84px 0; }
+.section.soft { background: var(--soft); }
+.section-head { max-width: 44rem; margin-bottom: 44px; }
+.section-head p { color: var(--muted); font-size: 1.1rem; }
+.eyebrow {
+  display: block;
+  font-family: var(--title);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+/* Bande de chiffres / atouts */
+.strengths {
+  background: var(--navy);
+  color: var(--white);
+}
+.strengths ul {
+  list-style: none; margin: 0; padding: 26px 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+}
+.strengths li { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+.strengths svg { width: 28px; height: 28px; flex: none; color: #8fb0ff; }
+
+/* Cartes de services */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 28px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--navy);
+}
+.card .icon {
+  width: 56px; height: 56px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--soft); color: var(--navy);
+  margin-bottom: 18px;
+}
+.card .icon svg { width: 30px; height: 30px; }
+.card p { color: var(--muted); margin-bottom: 0.6em; }
+.card ul { margin: 0; padding-left: 1.1em; color: var(--muted); }
+.card a.more { font-weight: 600; text-decoration: none; }
+
+/* Bloc image + texte */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.split img { border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; height: 100%; object-fit: cover; }
+.split.reverse > :first-child { order: 2; }
+.checklist { list-style: none; margin: 0 0 1.4em; padding: 0; }
+.checklist li { position: relative; padding-left: 32px; margin-bottom: 10px; }
+.checklist li::before {
+  content: ""; position: absolute; left: 0; top: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+
+/* Bannière appel */
+.cta {
+  background: var(--red);
+  color: var(--white);
+  padding: 56px 0;
+}
+.cta .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.cta h2 { color: var(--white); margin: 0; }
+.cta p { margin: 6px 0 0; color: rgba(255, 255, 255, 0.9); }
+.cta .btn-ghost:hover { color: var(--red); }
+
+/* Infos pratiques / contact */
+.info-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: stretch; }
+.info-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.info-list li { display: flex; gap: 16px; align-items: flex-start; }
+.info-list .icon {
+  width: 46px; height: 46px; flex: none; border-radius: 10px;
+  display: grid; place-items: center; background: var(--navy); color: var(--white);
+}
+.info-list .icon svg { width: 22px; height: 22px; }
+.info-list strong { display: block; font-family: var(--title); font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); }
+.info-list a { color: var(--text); text-decoration: none; }
+.info-list a:hover { color: var(--blue); text-decoration: underline; }
+.map {
+  border: 0; width: 100%; min-height: 360px; height: 100%;
+  border-radius: var(--radius); box-shadow: var(--shadow); background: var(--soft);
+}
+.socials { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+
+/* Annonces Autolina */
+.listing-frame { width: 1px; min-width: 100%; min-height: 900px; border: 0; }
+
+/* ---------- Pied de page ---------- */
+.site-footer {
+  background: var(--navy-dark);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 56px 0 28px;
+  font-size: 0.95rem;
+}
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.site-footer img { height: 48px; width: auto; margin-bottom: 14px; }
+.site-footer h3 { color: var(--white); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.site-footer a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+.site-footer a:hover { color: var(--white); text-decoration: underline; }
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 40px; padding-top: 20px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-size: 0.85rem;
+}
+
+/* Texte long (confidentialité) */
+.prose { max-width: 46rem; }
+.prose h2 { font-size: 1.6rem; margin-top: 1.6em; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .strengths ul { grid-template-columns: 1fr 1fr; }
+  .split, .info-grid { grid-template-columns: 1fr; gap: 32px; }
+  .split.reverse > :first-child { order: 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .topbar .hide-mobile { display: none; }
+  .menu-toggle { display: block; }
+  .site-header .container { height: 66px; }
+  .logo img { height: 42px; }
+  .nav {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--navy);
+    border-bottom: 3px solid var(--red);
+    padding: 8px 16px 16px;
+  }
+  .nav.open { display: flex; }
+  .nav a { padding: 14px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+  .nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--red); padding-left: 14px; }
+  .nav .nav-call { margin: 12px 0 0; text-align: center; }
+  .section { padding: 60px 0; }
+  .cards, .strengths ul, .footer-grid { grid-template-columns: 1fr; }
+  .hero { min-height: 0; }
+  .hero::before { background: rgba(2, 15, 46, 0.78); }
+  .container { padding: 0 16px; }
+}
