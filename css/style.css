@@ -351,3 +351,76 @@ p { margin: 0 0 1em; }
   .hero::before { background: rgba(var(--shade), 0.78); }
   .container { padding: 0 16px; }
 }
+
+/* ==========================================================================
+   Animations (discrètes). Désactivées si l'utilisateur préfère moins de mouvement.
+   Les éléments ne sont masqués que si le JS tourne (classe .js sur <html>).
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Hero : entrée du texte en cascade + lent mouvement de la photo */
+  .hero { animation: hero-pan 24s ease-in-out infinite alternate; }
+  .hero .kicker, .hero h1, .hero .lead, .hero .actions,
+  .page-hero .eyebrow, .page-hero h1, .page-hero p {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero h1, .page-hero h1 { animation-delay: 0.12s; }
+  .hero .lead, .page-hero p { animation-delay: 0.24s; }
+  .hero .actions { animation-delay: 0.36s; }
+  .hero .kicker, .page-hero .eyebrow { position: relative; }
+
+  /* Filet orange qui se dessine sous l'en-tête */
+  .site-header { border-bottom-color: transparent; }
+  .site-header::after {
+    content: ""; position: absolute; left: 0; bottom: -3px; height: 3px; width: 100%;
+    background: var(--accent); transform-origin: left; animation: draw 0.9s 0.2s ease-out both;
+  }
+
+  /* Bouton Appeler du hero : petite sonnerie toutes les quelques secondes */
+  .hero .btn-red svg { animation: ring 4s 1.5s ease-in-out infinite; transform-origin: 50% 50%; }
+
+  /* Apparition au défilement */
+  .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* Coches qui « poppent » quand la liste apparaît */
+  .js .reveal .checklist li::before, .js .reveal .checklist li::after { transform: scale(0); transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+  .js .reveal .checklist li::after { transform: rotate(45deg) scale(0); }
+  .js .reveal.in .checklist li::before { transform: scale(1); }
+  .js .reveal.in .checklist li::after { transform: rotate(45deg) scale(1); }
+  .js .reveal.in .checklist li:nth-child(1)::before, .js .reveal.in .checklist li:nth-child(1)::after { transition-delay: 0.35s; }
+  .js .reveal.in .checklist li:nth-child(2)::before, .js .reveal.in .checklist li:nth-child(2)::after { transition-delay: 0.5s; }
+  .js .reveal.in .checklist li:nth-child(3)::before, .js .reveal.in .checklist li:nth-child(3)::after { transition-delay: 0.65s; }
+
+  /* Survols */
+  .card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(var(--shade), 0.18); border-top-color: var(--accent); }
+  .card .icon { transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+  .card:hover .icon { background: var(--accent); color: var(--on-accent); transform: rotate(-8deg); }
+  .card a.more { transition: letter-spacing 0.2s ease; }
+  .card:hover a.more { letter-spacing: 0.03em; }
+  .split img { transition: transform 0.6s ease, box-shadow 0.6s ease; }
+  .split img:hover { transform: scale(1.02); box-shadow: 0 20px 44px rgba(var(--shade), 0.2); }
+  .strengths li svg { transition: transform 0.3s ease; }
+  .strengths li:hover svg { transform: scale(1.2) rotate(-6deg); }
+  .btn-red, .btn-navy { position: relative; overflow: hidden; }
+  .btn-red::after, .btn-navy::after {
+    content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg); transition: left 0.6s ease;
+  }
+  .btn-red:hover::after, .btn-navy:hover::after { left: 130%; }
+}
+
+/* En-tête : ombre quand on a défilé */
+.site-header { transition: box-shadow 0.3s ease; }
+.site-header.scrolled { box-shadow: 0 6px 24px rgba(var(--shade), 0.35); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes hero-pan { from { background-position: center 34%; } to { background-position: center 52%; } }
+@keyframes ring {
+  0%, 82%, 100% { transform: rotate(0); }
+  85% { transform: rotate(-16deg); } 88% { transform: rotate(14deg); }
+  91% { transform: rotate(-12deg); } 94% { transform: rotate(8deg); } 97% { transform: rotate(-4deg); }
+}
