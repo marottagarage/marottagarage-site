@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=5">
+  <link rel="stylesheet" href="/css/style.css?v=6">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,8 +51,23 @@
     "sameAs": ["https://www.facebook.com/Marotta.Garage.sarl/"]
   }
   </script>
+  <script>
+    // Intro « porte de garage » : une seule fois par visite, et jamais en mode « réduire les animations »
+    (function () {
+      var d = document.documentElement, seen = false;
+      try { seen = !!sessionStorage.getItem("intro-vue"); sessionStorage.setItem("intro-vue", "1"); } catch (e) {}
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!seen && !reduce) d.classList.add("intro-on");
+    })();
+  </script>
 </head>
 <body>
+  <div class="garage-door" aria-hidden="true">
+    <div class="garage-door-inner">
+      <img src="/images/logo-blanc.png" alt="" width="260" height="80">
+      <span class="gauge"><span></span></span>
+    </div>
+  </div>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
   <div class="topbar">
@@ -229,6 +244,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=5"></script>
+  <script src="/js/main.js?v=6"></script>
 </body>
 </html>
