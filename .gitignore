@@ -4,3 +4,5 @@ desktop.ini
 *.xlsx
 *.docx
 images/origine/
+qr-codes/
+_*.html
