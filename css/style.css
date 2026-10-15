@@ -319,9 +319,8 @@ p { margin: 0 0 1em; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 760px) {
-  body { font-size: 16px; }
-  .topbar .hide-mobile { display: none; }
+/* Menu ☰ dès que les 6 liens ne tiennent plus sur une ligne (tablettes, petits écrans) */
+@media (max-width: 1120px) {
   .lang-switch {
     display: inline-flex; align-items: center; margin-left: auto; margin-right: 6px;
     color: var(--white); text-decoration: none; font-family: var(--title); font-weight: 600;
@@ -330,8 +329,6 @@ p { margin: 0 0 1em; }
   }
   .nav .nav-lang { display: none; }
   .menu-toggle { display: block; }
-  .site-header .container { height: 66px; }
-  .logo img { height: 42px; }
   .nav {
     display: none;
     position: absolute; top: 100%; left: 0; right: 0;
@@ -345,6 +342,13 @@ p { margin: 0 0 1em; }
   .nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); padding-left: 14px; }
   .nav .nav-lang { margin: 12px 0 0; text-align: center; }
   .nav .nav-call { margin: 12px 0 0; text-align: center; }
+}
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .topbar .hide-mobile { display: none; }
+  .site-header .container { height: 66px; }
+  .logo img { height: 42px; }
   .section { padding: 60px 0; }
   .cards, .tools .cards, .strengths ul, .footer-grid { grid-template-columns: 1fr; }
   .hero { min-height: 0; }
@@ -662,3 +666,26 @@ button.btn { cursor: pointer; font-family: var(--title); }
 @media (max-width: 760px) {
   .tools .cards { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   Page « Vendre ma voiture » + bandeau de l'accueil
+   ========================================================================== */
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
+.page-hero .hero-actions { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.36s both; }
+.steps .icon.step-num {
+  background: var(--accent); color: var(--on-accent);
+  font-family: var(--title); font-weight: 700; font-size: 1.8rem;
+}
+.buy-band {
+  position: relative; overflow: hidden;
+  background: linear-gradient(110deg, var(--brand-dark) 0%, var(--brand) 100%);
+  color: var(--white); padding: 52px 0;
+}
+.buy-band::before {
+  content: ""; position: absolute; inset: 0; opacity: 0.12;
+  background: url("../images/garage-panorama.jpg") center / cover no-repeat;
+}
+.buy-band .container { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.buy-band h2 { color: var(--white); margin: 0; }
+.buy-band p { margin: 8px 0 0; color: rgba(255, 255, 255, 0.88); }
+.buy-band .eyebrow { color: #ffb27a; }

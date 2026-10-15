@@ -181,9 +181,9 @@
         lines.push((label ? label.textContent : f.name) + " : " + v);
       });
       var brand = document.getElementById("t-brand").value.trim(), model = document.getElementById("t-model").value.trim();
-      var subject = (DE ? "Anfrage Eintauschschätzung · " : "Demande d'estimation de reprise · ") + brand + " " + model;
-      var body = (DE ? "Guten Tag,\n\nich möchte eine Schätzung für den Eintausch meines Autos:\n\n"
-                     : "Bonjour,\n\nJe souhaite une estimation de reprise pour ma voiture :\n\n") +
+      var subject = (DE ? "Auto zu verkaufen / Eintausch · " : "Voiture à vendre / reprise · ") + brand + " " + model;
+      var body = (DE ? "Guten Tag,\n\nich möchte eine Schätzung für mein Auto:\n\n"
+                     : "Bonjour,\n\nJe souhaite une estimation pour ma voiture :\n\n") +
         lines.join("\n") + (DE ? "\n\n(Fotos im Anhang)\n\nFreundliche Grüsse" : "\n\n(Photos en pièces jointes)\n\nMeilleures salutations");
       location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     });

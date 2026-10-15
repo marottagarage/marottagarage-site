@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=9">
+  <link rel="stylesheet" href="/css/style.css?v=10">
   <script src="https://www.autolina.ch/iframe/iframe.js"></script>
 </head>
 <body>
@@ -49,6 +49,7 @@
         <a href="/">Accueil</a>
         <a href="/services/">Services</a>
         <a href="/voiture/" aria-current="page">Nos voitures</a>
+        <a href="/reprise/">Vendre ma voiture</a>
         <a href="/voyants/">Voyants</a>
         <a href="/contact/">Contact</a>
         <a class="nav-lang notranslate" translate="no" href="/de/fahrzeuge/" hreflang="de" lang="de">DE</a>
@@ -75,34 +76,13 @@
 
     <section class="section soft" id="reprise">
       <div class="container split">
+        <img src="/images/garage-vue-2.jpg" alt="Le garage Marotta à Orpund vu du ciel" width="1600" height="900" loading="lazy">
         <div>
-          <span class="eyebrow">Reprise</span>
-          <h2>Combien vaut votre voiture&nbsp;?</h2>
-          <p>Vous voulez changer de voiture&nbsp;? Décrivez la vôtre en une minute : nous vous recontactons avec une proposition de reprise, sans engagement.</p>
-          <ul class="checklist">
-            <li>Réponse rapide, par téléphone ou par e-mail</li>
-            <li>Reprise possible à l’achat d’une de nos voitures</li>
-            <li>Sans engagement</li>
-          </ul>
+          <span class="eyebrow">Vendre ou reprendre</span>
+          <h2>Nous achetons aussi votre voiture</h2>
+          <p>Vous voulez vendre votre voiture, ou la faire reprendre à l’achat d’une des nôtres&nbsp;? Estimation gratuite et sans engagement.</p>
+          <a class="btn btn-red" href="/reprise/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3l4 4-4 4"/><path d="M3 7h18"/><path d="M7 21l-4-4 4-4"/><path d="M21 17H3"/></svg> Faire estimer ma voiture</a>
         </div>
-        <form class="form-card" id="tradein-form" data-lang="fr">
-          <div class="form-grid">
-            <div class="field"><label for="t-brand">Marque</label><input id="t-brand" name="Marque" required placeholder="ex. Volkswagen"></div>
-            <div class="field"><label for="t-model">Modèle</label><input id="t-model" name="Modèle" required placeholder="ex. Golf 1.5 TSI"></div>
-            <div class="field"><label for="t-year">Année</label><input id="t-year" name="Année" inputmode="numeric" placeholder="ex. 2018"></div>
-            <div class="field"><label for="t-km">Kilomètres</label><input id="t-km" name="Kilomètres" inputmode="numeric" placeholder="ex. 85000"></div>
-            <div class="field"><label for="t-fuel">Carburant</label><select id="t-fuel" name="Carburant"><option>Essence</option><option>Diesel</option><option>Hybride</option><option>Électrique</option><option>Autre</option></select></div>
-            <div class="field"><label for="t-gear">Boîte</label><select id="t-gear" name="Boîte"><option>Manuelle</option><option>Automatique</option></select></div>
-            <div class="field full"><label for="t-state">État général</label><select id="t-state" name="État"><option>Très bon</option><option>Bon</option><option>Quelques défauts</option><option>À réparer</option></select></div>
-            <div class="field"><label for="t-name">Votre nom</label><input id="t-name" name="Nom" required autocomplete="name"></div>
-            <div class="field"><label for="t-phone">Téléphone</label><input id="t-phone" name="Téléphone" type="tel" autocomplete="tel"></div>
-            <div class="field full"><label for="t-msg">Remarques (options, dégâts, voiture recherchée…)</label><textarea id="t-msg" name="Remarques"></textarea></div>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Préparer ma demande</button>
-          </div>
-          <p class="form-note">Votre application e-mail s’ouvre avec la demande déjà remplie. Ajoutez-y 3 ou 4 photos de la voiture, puis envoyez.</p>
-        </form>
       </div>
     </section>
 
@@ -141,6 +121,7 @@
           <ul>
             <li><a href="/services/">Services</a></li>
             <li><a href="/voiture/">Nos voitures</a></li>
+            <li><a href="/reprise/">Vendre ma voiture</a></li>
             <li><a href="/voyants/">Que veut dire ce voyant ?</a></li>
             <li><a href="/contact/">Contact &amp; accès</a></li>
             <li><a href="https://www.facebook.com/Marotta.Garage.sarl/" rel="noopener">Facebook</a></li>
@@ -155,6 +136,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=9"></script>
+  <script src="/js/main.js?v=10"></script>
 </body>
 </html>
