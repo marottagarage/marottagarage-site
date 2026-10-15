@@ -346,7 +346,7 @@ p { margin: 0 0 1em; }
   .nav .nav-lang { margin: 12px 0 0; text-align: center; }
   .nav .nav-call { margin: 12px 0 0; text-align: center; }
   .section { padding: 60px 0; }
-  .cards, .strengths ul, .footer-grid { grid-template-columns: 1fr; }
+  .cards, .tools .cards, .strengths ul, .footer-grid { grid-template-columns: 1fr; }
   .hero { min-height: 0; }
   .hero::before { background: rgba(var(--shade), 0.78); }
   .container { padding: 0 16px; }
@@ -578,6 +578,7 @@ p { margin: 0 0 1em; }
 /* ==========================================================================
    Outils pratiques (cartes de l'accueil)
    ========================================================================== */
+.tools .cards { grid-template-columns: repeat(2, 1fr); }
 .tools .card { display: flex; flex-direction: column; }
 .tools .card .more { margin-top: auto; padding-top: 10px; }
 .tools .card .icon { background: var(--brand); color: var(--white); }
@@ -656,4 +657,8 @@ button.btn { cursor: pointer; font-family: var(--title); }
   .open-status.is-open::before { animation: none; }
   .logo-mark .logo-wheel { transition: none; }
   .logo-wheel.spin, .logo-wheel.honk { animation: none; }
+}
+
+@media (max-width: 760px) {
+  .tools .cards { grid-template-columns: 1fr; }
 }

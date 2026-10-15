@@ -1,5 +1,5 @@
 // Marotta Garage Sàrl — menu mobile, badge « ouvert », bandeau de saison, voyants,
-// rappel d'agenda, demande de reprise, volant + klaxon et animations au défilement.
+// demande de reprise, volant + klaxon et animations au défilement.
 (function () {
   var DE = (document.documentElement.lang || "").indexOf("de") === 0;
   var PHONE = "032 355 20 02";
@@ -166,89 +166,6 @@
   if (lights.length && location.hash) {
     var target = document.getElementById(location.hash.slice(1));
     if (target && target.classList.contains("light")) openLight(target, true);
-  }
-
-  /* ---------- Rappel d'agenda (.ics + Google Agenda) ---------- */
-  var reminder = document.getElementById("reminder-form");
-  if (reminder) {
-    var rType = document.getElementById("r-type"), rDate = document.getElementById("r-date"),
-        rInterval = document.getElementById("r-interval"), rCar = document.getElementById("r-car"),
-        rGoogle = document.getElementById("r-google"), rResult = document.getElementById("r-result");
-    var LABELS = DE
-      ? { service: "Service", expertise: "MFK", pneus: "Reifenwechsel" }
-      : { service: "Service", expertise: "Expertise", pneus: "Changement de pneus" };
-
-    var pad = function (n) { return ("0" + n).slice(-2); };
-    var ymd = function (d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()); };
-    function dueDate() {
-      if (!rDate.value) return null;
-      var p = rDate.value.split("-"), months = parseInt(rInterval.value, 10);
-      var d = new Date(+p[0], +p[1] - 1 + months, 1);
-      var last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
-      d.setDate(Math.min(+p[2], last));
-      return d;
-    }
-    function texts() {
-      var car = rCar.value.trim();
-      var title = LABELS[rType.value] + (car ? " · " + car : "") + " · Marotta Garage";
-      var details = DE
-        ? "Zeit für einen Termin bei Marotta Garage! Tel. " + PHONE + " · marottagarage.ch"
-        : "C'est le moment de prendre rendez-vous chez Marotta Garage ! Tél. " + PHONE + " · marottagarage.ch";
-      return { title: title, details: details, location: "Marotta Garage Sàrl, Hauptstrasse 35, 2552 Orpund" };
-    }
-    function updateGoogle() {
-      var d = dueDate();
-      if (!d) { rGoogle.setAttribute("href", "#"); return; }
-      var next = new Date(d); next.setDate(d.getDate() + 1);
-      var t = texts();
-      rGoogle.href = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-        "&text=" + encodeURIComponent(t.title) + "&dates=" + ymd(d) + "/" + ymd(next) +
-        "&details=" + encodeURIComponent(t.details) + "&location=" + encodeURIComponent(t.location);
-    }
-    function showResult(d) {
-      rResult.textContent = (DE ? "✅ Erinnerung für den " : "✅ Rappel prévu pour le ") +
-        d.toLocaleDateString(DE ? "de-CH" : "fr-CH", { day: "numeric", month: "long", year: "numeric" }) +
-        (DE ? " (Hinweis 2 Wochen vorher). Öffnen Sie die heruntergeladene Datei, um sie in Ihren Kalender einzutragen."
-            : " (alerte 2 semaines avant). Ouvrez le fichier téléchargé pour l'ajouter à votre agenda.");
-      rResult.classList.add("show");
-    }
-    var esc = function (s) { return s.replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n"); };
-
-    rType.addEventListener("change", function () {
-      var m = rType.options[rType.selectedIndex].getAttribute("data-months");
-      if (m) rInterval.value = m;
-      updateGoogle();
-    });
-    [rDate, rInterval, rCar].forEach(function (el) { el.addEventListener("input", updateGoogle); el.addEventListener("change", updateGoogle); });
-    rGoogle.addEventListener("click", function (e) {
-      var d = dueDate();
-      if (!d) { e.preventDefault(); rDate.focus(); rDate.reportValidity && rDate.reportValidity(); return; }
-      showResult(d);
-    });
-    reminder.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var d = dueDate();
-      if (!d) { rDate.focus(); return; }
-      var next = new Date(d); next.setDate(d.getDate() + 1);
-      var t = texts(), now = new Date();
-      var stamp = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + "T" + pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + "00Z";
-      var ics = [
-        "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Marotta Garage//Rappel//FR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-        "BEGIN:VEVENT",
-        "UID:" + stamp + "-" + Math.random().toString(36).slice(2) + "@marottagarage.ch",
-        "DTSTAMP:" + stamp,
-        "DTSTART;VALUE=DATE:" + ymd(d), "DTEND;VALUE=DATE:" + ymd(next),
-        "SUMMARY:" + esc(t.title), "DESCRIPTION:" + esc(t.details), "LOCATION:" + esc(t.location),
-        "URL:https://marottagarage.ch/",
-        "BEGIN:VALARM", "TRIGGER:-P14D", "ACTION:DISPLAY", "DESCRIPTION:" + esc(t.title), "END:VALARM",
-        "END:VEVENT", "END:VCALENDAR"
-      ].join("\r\n");
-      var a = document.createElement("a");
-      a.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
-      a.download = DE ? "erinnerung-marotta-garage.ics" : "rappel-marotta-garage.ics";
-      document.body.appendChild(a); a.click(); a.remove();
-      showResult(d);
-    });
   }
 
   /* ---------- Demande de reprise : prépare un e-mail ---------- */

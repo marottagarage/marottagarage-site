@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=8">
+  <link rel="stylesheet" href="/css/style.css?v=9">
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -106,57 +106,6 @@
       </div>
     </section>
 
-    <section class="section soft" id="rappel">
-      <div class="container split">
-        <div>
-          <span class="eyebrow">Outil gratuit</span>
-          <h2>Ne ratez plus jamais un rendez-vous</h2>
-          <p>Indiquez la date de votre dernier service, de votre dernière expertise ou de votre dernier changement de pneus. Nous créons un rappel que vous ajoutez à l’agenda de votre téléphone, avec une alerte deux semaines avant.</p>
-          <ul class="checklist">
-            <li>Fonctionne sur iPhone, Android, Outlook et Google Agenda</li>
-            <li>Aucune inscription, rien n’est envoyé chez nous</li>
-            <li>Le numéro du garage est dans le rappel : un clic pour appeler</li>
-          </ul>
-          <p class="form-note">Pour l’expertise, la date exacte figure sur la convocation de l’office de la circulation.</p>
-        </div>
-        <form class="form-card" id="reminder-form" data-lang="fr">
-          <div class="form-grid">
-            <div class="field full">
-              <label for="r-type">Rappel pour</label>
-              <select id="r-type" name="type">
-                <option value="service" data-months="12">Service / entretien</option>
-                <option value="expertise" data-months="24">Expertise (contrôle périodique)</option>
-                <option value="pneus" data-months="6">Changement de pneus</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="r-date">Dernière fois le</label>
-              <input type="date" id="r-date" name="date" required>
-            </div>
-            <div class="field">
-              <label for="r-interval">Prochain dans</label>
-              <select id="r-interval" name="interval">
-                <option value="6">6 mois</option>
-                <option value="12" selected>1 an</option>
-                <option value="24">2 ans</option>
-                <option value="36">3 ans</option>
-                <option value="48">4 ans</option>
-              </select>
-            </div>
-            <div class="field full">
-              <label for="r-car">Véhicule (facultatif)</label>
-              <input type="text" id="r-car" name="car" placeholder="ex. VW Golf BE 123456">
-            </div>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg> Ajouter à mon agenda</button>
-            <a class="btn btn-outline" id="r-google" href="#" target="_blank" rel="noopener">Google Agenda</a>
-          </div>
-          <div class="form-result" id="r-result" role="status"></div>
-        </form>
-      </div>
-    </section>
-
     <section class="cta">
       <div class="container">
         <div>
@@ -206,6 +155,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=8"></script>
+  <script src="/js/main.js?v=9"></script>
 </body>
 </html>
