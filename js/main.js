@@ -18,8 +18,8 @@
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  /* ---------- Badge « Ouvert maintenant » (heure de Zurich) ---------- */
-  // Minutes depuis minuit ; 0 = dimanche … 6 = samedi. Jours fériés non gérés.
+  /* ---------- Badge « Ouvert maintenant » (heure de Zurich, fériés bernois) ---------- */
+  // Minutes depuis minuit ; 0 = dimanche … 6 = samedi.
   var HOURS = {
     1: [[435, 725], [805, 1050]], 2: [[435, 725], [805, 1050]],
     3: [[435, 725], [805, 1050]], 4: [[435, 725], [805, 1050]],
@@ -28,26 +28,54 @@
   var DAYS_FR = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
   var DAYS_DE = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
 
+  // Jours fériés officiels du canton de Berne (dates fixes + calculées depuis Pâques)
+  function easter(y) {
+    var a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4,
+        f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30,
+        i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451),
+        month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+    return Date.UTC(y, month - 1, day);
+  }
+  function holiday(y, mo, d) {
+    var fixed = {
+      "1-1": ["Nouvel An", "Neujahr"], "1-2": ["Saint-Berchtold", "Berchtoldstag"],
+      "8-1": ["Fête nationale", "Bundesfeier"], "12-25": ["Noël", "Weihnachten"], "12-26": ["Saint-Étienne", "Stephanstag"]
+    };
+    var name = fixed[mo + "-" + d];
+    if (!name) {
+      var diff = Math.round((Date.UTC(y, mo - 1, d) - easter(y)) / 86400000);
+      name = { "-2": ["Vendredi saint", "Karfreitag"], "1": ["Lundi de Pâques", "Ostermontag"],
+               "39": ["Ascension", "Auffahrt"], "50": ["Lundi de Pentecôte", "Pfingstmontag"] }[diff];
+    }
+    return name ? name[DE ? 1 : 0] : null;
+  }
+
   function zurichNow() {
     try {
       var parts = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Europe/Zurich", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+        timeZone: "Europe/Zurich", year: "numeric", month: "numeric", day: "numeric",
+        weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
       }).formatToParts(new Date());
       var map = {};
       parts.forEach(function (p) { map[p.type] = p.value; });
-      var day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(map.weekday);
-      return { day: day, min: parseInt(map.hour, 10) * 60 + parseInt(map.minute, 10) };
+      return {
+        y: +map.year, mo: +map.month, d: +map.day,
+        day: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(map.weekday),
+        min: parseInt(map.hour, 10) * 60 + parseInt(map.minute, 10)
+      };
     } catch (e) {
-      var d = new Date();
-      return { day: d.getDay(), min: d.getHours() * 60 + d.getMinutes() };
+      var n = new Date();
+      return { y: n.getFullYear(), mo: n.getMonth() + 1, d: n.getDate(), day: n.getDay(), min: n.getHours() * 60 + n.getMinutes() };
     }
   }
   function fmt(m) {
     var h = Math.floor(m / 60), mm = ("0" + (m % 60)).slice(-2);
     return DE ? h + "." + mm + " Uhr" : h + "h" + mm;
   }
-  function openStatus() {
-    var now = zurichNow(), slots = HOURS[now.day] || [], i;
+  function openStatus(now) {
+    now = now || zurichNow();
+    var todayOff = holiday(now.y, now.mo, now.d);
+    var slots = todayOff ? [] : (HOURS[now.day] || []), i;
     for (i = 0; i < slots.length; i++) {
       if (now.min >= slots[i][0] && now.min < slots[i][1]) {
         var end = slots[i][1];
@@ -61,12 +89,15 @@
         return { cls: "is-closed", text: DE ? "Geschlossen · öffnet um " + fmt(slots[i][0]) : "Fermé · ouvre à " + fmt(slots[i][0]) };
       }
     }
-    for (var k = 1; k <= 7; k++) {
-      var d = (now.day + k) % 7;
-      if (HOURS[d]) {
-        var when = k === 1 ? (DE ? "morgen" : "demain") : (DE ? DAYS_DE[d] : DAYS_FR[d]);
-        return { cls: "is-closed", text: DE ? "Geschlossen · öffnet " + when + " um " + fmt(HOURS[d][0][0]) : "Fermé · ouvre " + when + " à " + fmt(HOURS[d][0][0]) };
-      }
+    var closed = DE ? "Geschlossen" : "Fermé";
+    if (todayOff) closed += " (" + todayOff + ")";
+    for (var k = 1; k <= 14; k++) {
+      var t = new Date(Date.UTC(now.y, now.mo - 1, now.d + k)), wd = t.getUTCDay();
+      if (!HOURS[wd] || holiday(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate())) continue;
+      var when = k === 1 ? (DE ? "morgen" : "demain") : (DE ? DAYS_DE[wd] : DAYS_FR[wd]);
+      if (k > 6) when = DE ? "am " + t.getUTCDate() + "." + (t.getUTCMonth() + 1) + "." : "le " + t.getUTCDate() + "." + (t.getUTCMonth() + 1);
+      var at = fmt(HOURS[wd][0][0]);
+      return { cls: "is-closed", text: DE ? closed + " · öffnet " + when + " um " + at : closed + " · ouvre " + when + " à " + at };
     }
     return null;
   }

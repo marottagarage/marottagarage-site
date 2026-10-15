@@ -426,46 +426,109 @@ p { margin: 0 0 1em; }
 }
 
 /* ==========================================================================
-   Intro de l'accueil : une porte de garage qui s'ouvre (une fois par visite).
-   Affichée seulement si le script a posé .intro-on sur <html>.
+   Intro de l'accueil : une vraie porte de garage à lamelles qui se lève
+   (une fois par visite). Affichée seulement si le script a posé .intro-on.
    Filet de sécurité : la porte s'ouvre toute seule en CSS, même sans JS.
    ========================================================================== */
 .garage-door { display: none; }
 .intro-on .garage-door {
-  display: grid; place-items: center;
+  display: block;
   position: fixed; inset: 0; z-index: 200;
+  pointer-events: none;
+  animation: door-open 1.25s cubic-bezier(0.55, 0, 0.3, 1) 1.9s forwards;
+}
+/* Le tablier : lamelles métalliques bombées, avec rainure sombre et reflet */
+.door-panels {
+  position: absolute; inset: 0 0 26px 0;
   background:
-    repeating-linear-gradient(180deg, transparent 0 58px, rgba(0, 0, 0, 0.18) 58px 60px, rgba(255, 255, 255, 0.06) 60px 62px),
-    linear-gradient(180deg, var(--brand) 0%, var(--brand-dark) 100%);
-  border-bottom: 6px solid var(--accent);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  animation: door-open 0.95s cubic-bezier(0.7, 0, 0.25, 1) 1.65s forwards;
+    /* reflets verticaux du métal brossé */
+    linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 18%, rgba(0,0,0,0.10) 50%, rgba(255,255,255,0) 82%, rgba(255,255,255,0.06) 100%),
+    /* chaque lamelle (64 px) : arête claire, bombé, ombre, rainure */
+    repeating-linear-gradient(180deg,
+      #4d7af0 0px, #3566e6 3px, #2a58d6 14px, #1f4ac2 34px, #1a3fa8 52px,
+      #132f80 58px, #0a1c52 61px, #061238 62px, #5f88f5 63px, #4d7af0 64px);
+  box-shadow: inset 0 -10px 18px rgba(0, 0, 0, 0.25);
 }
-.garage-door-inner { display: grid; justify-items: center; gap: 26px; }
-.garage-door img {
-  width: min(260px, 62vw); height: auto;
-  opacity: 0; transform: scale(0.85);
-  animation: door-logo 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s forwards;
+/* Rails latéraux */
+.door-panels::before, .door-panels::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 14px;
+  background: linear-gradient(90deg, #0b1d4f, #20367a 45%, #0b1d4f);
 }
-.garage-door .gauge {
-  display: block; width: min(220px, 52vw); height: 5px; border-radius: 3px;
+.door-panels::before { left: 0; }
+.door-panels::after { right: 0; }
+/* Barre basse + joint caoutchouc + poignée */
+.door-bottom {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 26px;
+  background: linear-gradient(180deg, #c9ced8 0%, #f2f4f8 30%, #9aa2b1 100%);
+  border-top: 2px solid #6b7486;
+}
+.door-bottom::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -10px; height: 10px;
+  background: #111; border-radius: 0 0 4px 4px;
+}
+.door-handle {
+  position: absolute; left: 50%; bottom: 46px; width: 120px; height: 16px; margin-left: -60px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f5f7fb, #a8b0bf);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+}
+/* Ombre portée sous la porte qui monte */
+.door-shadow {
+  position: absolute; left: 0; right: 0; bottom: -60px; height: 60px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
+}
+/* Plaque avec le logo, vissée sur la porte */
+.door-plate {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+  display: grid; justify-items: center; gap: 22px;
+  padding: 28px 40px 26px;
+  background: linear-gradient(180deg, #123a9e, #0b2a7a);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  animation: door-plate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s forwards;
+}
+.door-plate::before, .door-plate::after {
+  content: ""; position: absolute; top: 10px; width: 7px; height: 7px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #8a93a6);
+}
+.door-plate::before { left: 10px; }
+.door-plate::after { right: 10px; }
+.door-plate img { width: min(240px, 58vw); height: auto; display: block; }
+.door-plate .gauge {
+  display: block; width: min(200px, 48vw); height: 5px; border-radius: 3px;
   background: rgba(255, 255, 255, 0.18); overflow: hidden;
 }
-.garage-door .gauge span {
+.door-plate .gauge span {
   display: block; height: 100%; width: 100%;
   background: var(--accent); transform-origin: left; transform: scaleX(0);
-  animation: gauge 1.05s cubic-bezier(0.5, 0, 0.2, 1) 0.45s forwards;
+  animation: gauge 1.15s cubic-bezier(0.5, 0, 0.2, 1) 0.5s forwards;
 }
-/* Le contenu de l'accueil attend que la porte soit levée */
-.intro-on .hero .kicker, .intro-on .hero h1, .intro-on .hero .lead, .intro-on .hero .actions { animation-delay: 2.15s; }
-.intro-on .hero h1 { animation-delay: 2.27s; }
-.intro-on .hero .lead { animation-delay: 2.39s; }
-.intro-on .hero .actions { animation-delay: 2.51s; }
-.intro-on .site-header::after { animation-delay: 2.2s; }
+/* Voyant du moteur de porte qui clignote avant l'ouverture */
+.door-led {
+  position: absolute; right: 34px; bottom: 46px; width: 10px; height: 10px; border-radius: 50%;
+  background: #f26b1d; box-shadow: 0 0 10px #f26b1d;
+  animation: door-led 0.5s steps(2, jump-none) 0.6s 3;
+}
 
-@keyframes door-logo { to { opacity: 1; transform: none; } }
+/* Le contenu de l'accueil attend que la porte soit levée */
+.intro-on .hero .kicker, .intro-on .hero h1, .intro-on .hero .lead, .intro-on .hero .actions { animation-delay: 2.55s; }
+.intro-on .hero h1 { animation-delay: 2.67s; }
+.intro-on .hero .lead { animation-delay: 2.79s; }
+.intro-on .hero .actions { animation-delay: 2.91s; }
+.intro-on .site-header::after { animation-delay: 2.6s; }
+
+@keyframes door-plate { from { opacity: 0; transform: translate(-50%, -46%) scale(0.92); } to { opacity: 1; transform: translate(-50%, -50%); } }
 @keyframes gauge { to { transform: scaleX(1); } }
-@keyframes door-open { to { transform: translateY(-105%); visibility: hidden; } }
+@keyframes door-led { 50% { opacity: 0.2; box-shadow: none; } }
+/* Petit à-coup du moteur, puis la porte monte et ralentit en haut */
+@keyframes door-open {
+  0% { transform: translateY(0); }
+  8% { transform: translateY(5px); }
+  16% { transform: translateY(-1%); }
+  100% { transform: translateY(-112%); visibility: hidden; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .intro-on .garage-door { display: none; }
