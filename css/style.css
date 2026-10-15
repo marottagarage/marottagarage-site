@@ -129,6 +129,7 @@ p { margin: 0 0 1em; }
 .nav a:hover { background: rgba(255, 255, 255, 0.1); }
 .nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--accent); border-radius: 0; }
 .nav .nav-call { background: var(--accent); color: var(--on-accent); margin-left: 8px; border-radius: 6px; }
+.nav .nav-lang { font-size: 1rem; border: 1px solid rgba(255, 255, 255, 0.45); padding: 5px 10px; margin-left: 6px; }
 .nav .nav-call:hover { background: var(--accent-hover); }
 
 .menu-toggle {
@@ -276,6 +277,9 @@ p { margin: 0 0 1em; }
   border: 0; width: 100%; min-height: 360px; height: 100%;
   border-radius: var(--radius); box-shadow: var(--shadow); background: var(--soft);
 }
+.hours { border-collapse: collapse; margin-top: 2px; }
+.hours th { text-align: left; font-weight: 600; padding: 0 18px 8px 0; vertical-align: top; white-space: nowrap; }
+.hours td { padding: 0 0 8px; }
 .socials { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
 
 /* Annonces Autolina */
@@ -288,7 +292,7 @@ p { margin: 0 0 1em; }
   padding: 56px 0 28px;
   font-size: 0.95rem;
 }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1.2fr 0.9fr; gap: 32px; }
 .site-footer img { height: 48px; width: auto; margin-bottom: 14px; }
 .site-footer h3 { color: var(--white); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
@@ -331,6 +335,7 @@ p { margin: 0 0 1em; }
   .nav.open { display: flex; }
   .nav a { padding: 14px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
   .nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); padding-left: 14px; }
+  .nav .nav-lang { margin: 12px 0 0; text-align: center; }
   .nav .nav-call { margin: 12px 0 0; text-align: center; }
   .section { padding: 60px 0; }
   .cards, .strengths ul, .footer-grid { grid-template-columns: 1fr; }

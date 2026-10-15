@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://marottagarage.ch/</loc></url>
-  <url><loc>https://marottagarage.ch/services/</loc></url>
-  <url><loc>https://marottagarage.ch/voiture/</loc></url>
-  <url><loc>https://marottagarage.ch/contact/</loc></url>
-  <url><loc>https://marottagarage.ch/confidentialite/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://marottagarage.ch/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/"/></url>
+  <url><loc>https://marottagarage.ch/de/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/"/></url>
+  <url><loc>https://marottagarage.ch/services/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/services/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/dienstleistungen/"/></url>
+  <url><loc>https://marottagarage.ch/de/dienstleistungen/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/services/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/dienstleistungen/"/></url>
+  <url><loc>https://marottagarage.ch/voiture/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voiture/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/fahrzeuge/"/></url>
+  <url><loc>https://marottagarage.ch/de/fahrzeuge/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voiture/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/fahrzeuge/"/></url>
+  <url><loc>https://marottagarage.ch/contact/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/contact/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/kontakt/"/></url>
+  <url><loc>https://marottagarage.ch/de/kontakt/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/contact/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/kontakt/"/></url>
+  <url><loc>https://marottagarage.ch/confidentialite/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/confidentialite/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/datenschutz/"/></url>
+  <url><loc>https://marottagarage.ch/de/datenschutz/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/confidentialite/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/datenschutz/"/></url>
 </urlset>
