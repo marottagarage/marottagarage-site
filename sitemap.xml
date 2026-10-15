@@ -10,4 +10,6 @@
   <url><loc>https://marottagarage.ch/de/kontakt/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/contact/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/kontakt/"/></url>
   <url><loc>https://marottagarage.ch/confidentialite/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/confidentialite/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/datenschutz/"/></url>
   <url><loc>https://marottagarage.ch/de/datenschutz/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/confidentialite/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/datenschutz/"/></url>
+  <url><loc>https://marottagarage.ch/voyants/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voyants/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/warnleuchten/"/></url>
+  <url><loc>https://marottagarage.ch/de/warnleuchten/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voyants/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/warnleuchten/"/></url>
 </urlset>

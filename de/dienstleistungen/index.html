@@ -23,22 +23,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=6">
+  <link rel="stylesheet" href="/css/style.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#contenu">Zum Inhalt</a>
 
   <div class="topbar">
     <div class="container">
-      <span class="hide-mobile">Mehrmarken-Garage · Hauptstrasse 35, 2552 Orpund</span>
-      <span><a href="tel:+41323552002">032 355 20 02</a> · <a href="mailto:rafmarotta@hotmail.com">rafmarotta@hotmail.com</a></span>
+      <span class="topbar-left"><span class="open-status" id="open-status" hidden></span><span class="hide-mobile">Mehrmarken-Garage · Hauptstrasse 35, 2552 Orpund</span></span>
+      <span><a href="tel:+41323552002">032 355 20 02</a><span class="hide-mobile"> · <a href="mailto:rafmarotta@hotmail.com">rafmarotta@hotmail.com</a></span></span>
     </div>
   </div>
 
   <header class="site-header">
     <div class="container">
       <a class="logo" href="/de/" aria-label="Marotta Garage Sàrl, Startseite">
-        <img src="/images/logo-blanc.png" alt="Marotta Garage Sàrl" width="169" height="52">
+        <span class="logo-mark"><img class="logo-text" src="/images/logo-texte.png" alt="Marotta Garage Sàrl" width="169" height="52"><img class="logo-wheel" src="/images/logo-volant.png" alt="" width="52" height="52"></span>
       </a>
       <a class="lang-switch notranslate" translate="no" href="/services/" hreflang="fr" lang="fr" aria-label="Français">FR</a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menü öffnen">
@@ -48,6 +48,7 @@
         <a href="/de/">Startseite</a>
         <a href="/de/dienstleistungen/" aria-current="page">Dienstleistungen</a>
         <a href="/de/fahrzeuge/">Fahrzeuge</a>
+        <a href="/de/warnleuchten/">Warnleuchten</a>
         <a href="/de/kontakt/">Kontakt</a>
         <a class="nav-lang notranslate" translate="no" href="/services/" hreflang="fr" lang="fr">FR</a>
         <a class="nav-call" href="tel:+41323552002">Anrufen</a>
@@ -105,6 +106,57 @@
       </div>
     </section>
 
+    <section class="section soft" id="erinnerung">
+      <div class="container split">
+        <div>
+          <span class="eyebrow">Kostenloses Tool</span>
+          <h2>Nie mehr einen Termin verpassen</h2>
+          <p>Geben Sie das Datum Ihres letzten Service, Ihrer letzten MFK oder Ihres letzten Reifenwechsels an. Wir erstellen eine Erinnerung für den Kalender Ihres Handys, mit einem Hinweis zwei Wochen vorher.</p>
+          <ul class="checklist">
+            <li>Funktioniert mit iPhone, Android, Outlook und Google Kalender</li>
+            <li>Keine Anmeldung, es wird nichts an uns gesendet</li>
+            <li>Die Nummer der Garage steht in der Erinnerung: ein Klick zum Anrufen</li>
+          </ul>
+          <p class="form-note">Für die MFK steht das genaue Datum auf dem Aufgebot des Strassenverkehrsamts.</p>
+        </div>
+        <form class="form-card" id="reminder-form" data-lang="de">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="r-type">Erinnerung für</label>
+              <select id="r-type" name="type">
+                <option value="service" data-months="12">Service / Wartung</option>
+                <option value="expertise" data-months="24">MFK (Fahrzeugprüfung)</option>
+                <option value="pneus" data-months="6">Reifenwechsel</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="r-date">Zuletzt am</label>
+              <input type="date" id="r-date" name="date" required>
+            </div>
+            <div class="field">
+              <label for="r-interval">Nächstes Mal in</label>
+              <select id="r-interval" name="interval">
+                <option value="6">6 Monaten</option>
+                <option value="12" selected>1 Jahr</option>
+                <option value="24">2 Jahren</option>
+                <option value="36">3 Jahren</option>
+                <option value="48">4 Jahren</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="r-car">Fahrzeug (optional)</label>
+              <input type="text" id="r-car" name="car" placeholder="z.B. VW Golf BE 123456">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg> In meinen Kalender</button>
+            <a class="btn btn-outline" id="r-google" href="#" target="_blank" rel="noopener">Google Kalender</a>
+          </div>
+          <div class="form-result" id="r-result" role="status"></div>
+        </form>
+      </div>
+    </section>
+
     <section class="cta">
       <div class="container">
         <div>
@@ -140,6 +192,7 @@
           <ul>
             <li><a href="/de/dienstleistungen/">Dienstleistungen</a></li>
             <li><a href="/de/fahrzeuge/">Fahrzeuge</a></li>
+            <li><a href="/de/warnleuchten/">Was bedeutet diese Warnleuchte?</a></li>
             <li><a href="/de/kontakt/">Kontakt &amp; Anfahrt</a></li>
             <li><a href="https://www.facebook.com/Marotta.Garage.sarl/" rel="noopener">Facebook</a></li>
             <li><a href="/" hreflang="fr" lang="fr">Français</a></li>
@@ -153,6 +206,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=6"></script>
+  <script src="/js/main.js?v=7"></script>
 </body>
 </html>

@@ -470,3 +470,127 @@ p { margin: 0 0 1em; }
 @media (prefers-reduced-motion: reduce) {
   .intro-on .garage-door { display: none; }
 }
+
+/* ==========================================================================
+   Logo : volant qui tourne (couche séparée) + klaxon (3 clics)
+   ========================================================================== */
+.logo-mark { position: relative; display: block; line-height: 0; }
+.logo-mark .logo-wheel { position: absolute; left: 0; top: 0; transition: transform 0.7s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.logo:hover .logo-wheel { transform: rotate(-45deg); }
+.logo-wheel.spin { animation: wheel-spin 0.9s cubic-bezier(0.3, 1.3, 0.5, 1); }
+.logo-wheel.honk { animation: wheel-honk 0.5s ease-in-out; }
+@keyframes wheel-spin { 0% { transform: rotate(0); } 60% { transform: rotate(-200deg); } 100% { transform: rotate(0); } }
+@keyframes wheel-honk { 0%, 100% { transform: scale(1); } 25%, 75% { transform: scale(0.88); } 50% { transform: scale(1.08); } }
+.honk-bubble {
+  position: fixed; z-index: 300; pointer-events: none;
+  background: var(--accent); color: var(--on-accent);
+  font-family: var(--title); font-weight: 700; font-size: 1.3rem; letter-spacing: 0.06em;
+  padding: 6px 14px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: honk-pop 1.1s ease-out forwards;
+}
+@keyframes honk-pop { 0% { opacity: 0; transform: translateY(6px) scale(0.6); } 20% { opacity: 1; transform: translateY(0) scale(1.05); } 100% { opacity: 0; transform: translateY(-28px) scale(1); } }
+
+/* ==========================================================================
+   Badge « Ouvert maintenant »
+   ========================================================================== */
+.topbar-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.open-status { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--white); white-space: nowrap; }
+.open-status[hidden] { display: none; }
+.open-status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #9aa3b5; flex: none; }
+.open-status.is-open::before { background: #34d399; animation: pulse 2s infinite; }
+.open-status.is-soon::before { background: #fbbf24; }
+.open-status.is-closed::before { background: #f87171; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); } 70% { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
+
+/* ==========================================================================
+   Bandeau de saison (pneus, vacances…)
+   ========================================================================== */
+.season-banner { background: #fff4ec; border-bottom: 1px solid #ffd9c2; color: #7a2e0b; }
+.season-banner .container { display: flex; align-items: center; gap: 14px; padding-top: 10px; padding-bottom: 10px; }
+.season-banner p { margin: 0; flex: 1; font-weight: 500; }
+.season-banner a.season-cta { font-weight: 700; color: var(--accent-text); white-space: nowrap; }
+.season-banner button { background: none; border: 0; color: inherit; font-size: 1.4rem; line-height: 1; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; flex: none; }
+.season-banner button:hover { background: rgba(0, 0, 0, 0.06); }
+
+/* ==========================================================================
+   Outils pratiques (cartes de l'accueil)
+   ========================================================================== */
+.tools .card { display: flex; flex-direction: column; }
+.tools .card .more { margin-top: auto; padding-top: 10px; }
+.tools .card .icon { background: var(--brand); color: var(--white); }
+
+/* ==========================================================================
+   Page voyants
+   ========================================================================== */
+.legend { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 30px; padding: 0; list-style: none; }
+.legend li { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.legend i { width: 14px; height: 14px; border-radius: 50%; display: block; background: var(--lvl); }
+.lvl-red { --lvl: #dc2626; --lvl-bg: #fef2f2; }
+.lvl-orange { --lvl: #ea8a0c; --lvl-bg: #fff7ed; }
+.lvl-green { --lvl: #16a34a; --lvl-bg: #f0fdf4; }
+
+.lights { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+.light { border: 2px solid var(--line); border-radius: var(--radius); background: var(--white); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+.light:hover { border-color: var(--lvl); transform: translateY(-2px); }
+.light > button {
+  all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: grid; justify-items: center; align-items: center; gap: 10px; padding: 20px 12px 16px; text-align: center;
+  font-family: var(--title); font-weight: 600; font-size: 1.1rem; color: var(--ink); line-height: 1.15;
+}
+.light > button:focus-visible { outline: 3px solid var(--link); outline-offset: -3px; }
+.light > button svg { width: 54px; height: 54px; color: var(--lvl); fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.light .light-body { padding: 0 22px 22px; background: var(--lvl-bg); }
+.js .light .light-body { display: none; }
+.light.open { grid-column: 1 / -1; border-color: var(--lvl); box-shadow: var(--shadow); transform: none; }
+.light.open > button { grid-template-columns: auto 1fr; justify-items: start; text-align: left; font-size: 1.5rem; background: var(--lvl-bg); padding: 20px 22px; }
+.js .light.open .light-body { display: block; }
+.urgency { display: inline-block; background: var(--lvl); color: #fff; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin: 4px 0 12px; }
+.light-body p { margin: 0 0 10px; }
+.light-body .btn { margin-top: 6px; }
+.disclaimer { margin-top: 28px; color: var(--muted); font-size: 0.95rem; }
+
+/* ==========================================================================
+   Formulaires (rappel d'agenda, reprise)
+   ========================================================================== */
+.form-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 30px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+.form-grid .full { grid-column: 1 / -1; }
+.field label { display: block; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.field input, .field select, .field textarea {
+  width: 100%; font: inherit; color: var(--text); background: var(--white);
+  border: 1.5px solid #cfd7e6; border-radius: 8px; padding: 11px 12px;
+}
+.field textarea { min-height: 96px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--link); box-shadow: 0 0 0 3px rgba(23, 71, 201, 0.15); }
+.form-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; align-items: center; }
+.form-note { color: var(--muted); font-size: 0.92rem; margin: 14px 0 0; }
+.form-result { margin-top: 18px; padding: 14px 16px; border-radius: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; display: none; }
+.form-result.show { display: block; }
+button.btn { cursor: pointer; font-family: var(--title); }
+
+/* ==========================================================================
+   Avis clients
+   ========================================================================== */
+.reviews { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+.stars { color: #f5b301; font-size: 2rem; letter-spacing: 4px; line-height: 1; margin-bottom: 14px; }
+.review-card { background: var(--brand); color: var(--white); border-radius: var(--radius); padding: 34px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.review-card::after { content: "\201C"; position: absolute; right: 18px; top: -30px; font-size: 12rem; font-family: Georgia, serif; color: rgba(255, 255, 255, 0.08); }
+.review-card h3 { color: var(--white); font-size: 1.8rem; }
+.review-card p { color: rgba(255, 255, 255, 0.88); }
+
+@media (max-width: 960px) {
+  .reviews { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .topbar .container { font-size: 0.85rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-card { padding: 22px 18px; }
+  .lights { grid-template-columns: repeat(2, 1fr); }
+  .light.open > button { font-size: 1.25rem; }
+  .season-banner .container { font-size: 0.92rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .open-status.is-open::before { animation: none; }
+  .logo-mark .logo-wheel { transition: none; }
+  .logo-wheel.spin, .logo-wheel.honk { animation: none; }
+}
