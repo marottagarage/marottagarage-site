@@ -36,7 +36,20 @@
         month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
     return Date.UTC(y, month - 1, day);
   }
+  // Vacances du garage : fermé de « from » (à partir de fromMin minutes) jusqu'à « to » inclus (AAAAMMJJ)
+  var VACATIONS = [
+    { from: 20261224, fromMin: 725, to: 20270103, name: ["Vacances de fin d’année", "Betriebsferien"] }
+  ];
+  function vacation(y, mo, d) {
+    var key = y * 10000 + mo * 100 + d;
+    for (var v = 0; v < VACATIONS.length; v++) {
+      if (key > VACATIONS[v].from && key <= VACATIONS[v].to) return VACATIONS[v];
+    }
+    return null;
+  }
   function holiday(y, mo, d) {
+    var vac = vacation(y, mo, d);
+    if (vac) return vac.name[DE ? 1 : 0];
     var fixed = {
       "1-1": ["Nouvel An", "Neujahr"], "1-2": ["Saint-Berchtold", "Berchtoldstag"],
       "8-1": ["Fête nationale", "Bundesfeier"], "12-25": ["Noël", "Weihnachten"], "12-26": ["Saint-Étienne", "Stephanstag"]
@@ -76,6 +89,14 @@
     now = now || zurichNow();
     var todayOff = holiday(now.y, now.mo, now.d);
     var slots = todayOff ? [] : (HOURS[now.day] || []), i;
+    // Premier jour des vacances : seulement les plages qui finissent avant le début de la fermeture
+    var todayKey = now.y * 10000 + now.mo * 100 + now.d;
+    VACATIONS.forEach(function (v) {
+      if (todayKey === v.from) {
+        slots = slots.filter(function (s) { return s[1] <= v.fromMin; });
+        if (now.min >= v.fromMin) todayOff = v.name[DE ? 1 : 0];
+      }
+    });
     for (i = 0; i < slots.length; i++) {
       if (now.min >= slots[i][0] && now.min < slots[i][1]) {
         var end = slots[i][1];
@@ -95,7 +116,12 @@
       var t = new Date(Date.UTC(now.y, now.mo - 1, now.d + k)), wd = t.getUTCDay();
       if (!HOURS[wd] || holiday(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate())) continue;
       var when = k === 1 ? (DE ? "morgen" : "demain") : (DE ? DAYS_DE[wd] : DAYS_FR[wd]);
-      if (k > 6) when = DE ? "am " + t.getUTCDate() + "." + (t.getUTCMonth() + 1) + "." : "le " + t.getUTCDate() + "." + (t.getUTCMonth() + 1);
+      if (k > 6) {
+        var MONTHS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+        var MONTHS_DE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+        when = DE ? DAYS_DE[wd] + ", " + t.getUTCDate() + ". " + MONTHS_DE[t.getUTCMonth()] + ","
+                  : DAYS_FR[wd] + " " + t.getUTCDate() + " " + MONTHS_FR[t.getUTCMonth()];
+      }
       var at = fmt(HOURS[wd][0][0]);
       return { cls: "is-closed", text: DE ? closed + " · öffnet " + when + " um " + at : closed + " · ouvre " + when + " à " + at };
     }
