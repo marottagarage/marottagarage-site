@@ -14,4 +14,6 @@
   <url><loc>https://marottagarage.ch/de/warnleuchten/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voyants/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/warnleuchten/"/></url>
   <url><loc>https://marottagarage.ch/reprise/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/reprise/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/ankauf/"/></url>
   <url><loc>https://marottagarage.ch/de/ankauf/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/reprise/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/ankauf/"/></url>
+  <url><loc>https://marottagarage.ch/voitures-neuves/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voitures-neuves/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/neuwagen/"/></url>
+  <url><loc>https://marottagarage.ch/de/neuwagen/</loc><xhtml:link rel="alternate" hreflang="fr-CH" href="https://marottagarage.ch/voitures-neuves/"/><xhtml:link rel="alternate" hreflang="de-CH" href="https://marottagarage.ch/de/neuwagen/"/></url>
 </urlset>

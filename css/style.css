@@ -718,3 +718,31 @@ button.btn { cursor: pointer; font-family: var(--title); }
   .nav .nav-sub a { color: rgba(255, 255, 255, .85); font-size: .95rem; padding: 9px 8px; border-bottom: 0; }
   .nav .nav-sub a:hover { background: rgba(255, 255, 255, .08); color: var(--white); }
 }
+
+/* Page « Voitures neuves » */
+.nv-facts { background: var(--brand-dark); color: var(--white); }
+.nv-facts .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding-top: 22px; padding-bottom: 22px; }
+.nv-facts .container > div { display: flex; flex-direction: column; border-left: 3px solid var(--accent); padding-left: 14px; }
+.nv-facts strong { font-family: var(--title); font-size: 1.45rem; letter-spacing: .02em; text-transform: uppercase; line-height: 1.1; }
+.nv-facts span { color: rgba(255, 255, 255, .78); font-size: .95rem; }
+.nv-offers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.nv-car { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+.nv-car:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(11, 42, 122, .16); }
+.nv-car img { width: 100%; height: 190px !important; object-fit: cover; display: block; }
+.nv-car-body { display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 20px; flex: 1; }
+.nv-kind { font-family: var(--title); font-weight: 600; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
+.nv-car h3 { margin: 2px 0 0; font-size: 1.5rem; }
+.nv-spec { margin: 0; color: var(--muted); font-size: .95rem; }
+.nv-price { margin: 8px 0 4px; font-family: var(--title); font-weight: 700; font-size: 2rem; line-height: 1; color: var(--brand-dark); }
+.nv-price small { font-size: 1rem; color: var(--accent-text); }
+.nv-tag { align-self: flex-start; font-size: .82rem; font-weight: 600; color: var(--brand); background: #eef2fc; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+.nv-car .btn { margin-top: auto; justify-content: center; }
+.nv-note { color: var(--muted); font-size: .85rem; margin-top: 18px; }
+.nv-brands { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.nv-brands a { display: flex; align-items: center; justify-content: center; min-height: 58px; padding: 8px; text-align: center; background: var(--white); border: 1px solid var(--line); border-radius: 10px; font-family: var(--title); font-weight: 600; font-size: 1.05rem; letter-spacing: .04em; text-transform: uppercase; color: var(--brand-dark); text-decoration: none; transition: border-color .15s, color .15s, transform .15s; }
+.nv-brands a:hover { border-color: var(--brand); color: var(--brand); transform: translateY(-2px); }
+.nv-all { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
+.nv-all span { color: var(--muted); font-size: .9rem; }
+.nv-embed iframe { width: 100%; height: 1400px; border: 0; border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
+@media (max-width: 1120px) { .nv-offers { grid-template-columns: repeat(2, 1fr); } .nv-brands { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 760px) { .nv-facts .container { grid-template-columns: repeat(2, 1fr); } .nv-offers { grid-template-columns: 1fr; } .nv-brands { grid-template-columns: repeat(2, 1fr); } .nv-embed iframe { height: 1800px; } }
