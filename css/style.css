@@ -696,3 +696,25 @@ button.btn { cursor: pointer; font-family: var(--title); }
 .vcard-box strong { display: block; font-size: 1.05rem; color: var(--brand-dark); }
 .vcard-box p { margin: 4px 0 12px; color: var(--muted); font-size: .95rem; }
 @media (max-width: 560px) { .vcard-box { flex-direction: column; text-align: center; } }
+
+/* Sous-menu déroulant « Services » */
+.nav-drop { position: relative; display: flex; }
+.nav-drop > a { display: inline-flex; align-items: center; gap: 4px; }
+.nav-drop .chev { width: 16px; height: 16px; transition: transform .2s; }
+.nav-sub {
+  position: absolute; top: 100%; left: 0; min-width: 240px; padding: 8px;
+  background: var(--white); border-radius: 10px; border-top: 3px solid var(--accent);
+  box-shadow: 0 14px 34px rgba(11, 42, 122, .22);
+  opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .18s, transform .18s, visibility .18s; z-index: 50;
+}
+.nav-drop:hover .nav-sub, .nav-drop:focus-within .nav-sub { opacity: 1; visibility: visible; transform: none; }
+.nav-drop:hover .chev, .nav-drop:focus-within .chev { transform: rotate(180deg); }
+.nav .nav-sub a { display: block; color: var(--brand-dark); font-family: var(--body, inherit); font-size: 1rem; font-weight: 600; letter-spacing: 0; text-transform: none; padding: 10px 12px; border-radius: 6px; }
+.nav .nav-sub a:hover { background: #eef2fc; color: var(--brand); }
+@media (max-width: 1120px) {
+  .nav-drop { flex-direction: column; }
+  .nav-drop .chev { display: none; }
+  .nav-sub { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: transparent; border: 0; padding: 0 0 6px 14px; min-width: 0; }
+  .nav .nav-sub a { color: rgba(255, 255, 255, .85); font-size: .95rem; padding: 9px 8px; border-bottom: 0; }
+  .nav .nav-sub a:hover { background: rgba(255, 255, 255, .08); color: var(--white); }
+}
