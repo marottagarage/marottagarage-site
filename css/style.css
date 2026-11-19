@@ -689,3 +689,10 @@ button.btn { cursor: pointer; font-family: var(--title); }
 .buy-band h2 { color: var(--white); margin: 0; }
 .buy-band p { margin: 8px 0 0; color: rgba(255, 255, 255, 0.88); }
 .buy-band .eyebrow { color: #ffb27a; }
+
+/* Carte de visite (QR vCard + bouton « Ajouter aux contacts ») – page Contact */
+.vcard-box { display: flex; gap: 20px; align-items: center; margin-top: 28px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: #f7f9fe; }
+.vcard-box img { width: 132px; height: 132px; flex: none; background: #fff; border-radius: 8px; padding: 6px; border: 1px solid var(--line); }
+.vcard-box strong { display: block; font-size: 1.05rem; color: var(--brand-dark); }
+.vcard-box p { margin: 4px 0 12px; color: var(--muted); font-size: .95rem; }
+@media (max-width: 560px) { .vcard-box { flex-direction: column; text-align: center; } }
