@@ -746,3 +746,5 @@ button.btn { cursor: pointer; font-family: var(--title); }
 .nv-embed iframe { width: 100%; height: 1400px; border: 0; border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
 @media (max-width: 1120px) { .nv-offers { grid-template-columns: repeat(2, 1fr); } .nv-brands { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 760px) { .nv-facts .container { grid-template-columns: repeat(2, 1fr); } .nv-offers { grid-template-columns: 1fr; } .nv-brands { grid-template-columns: repeat(2, 1fr); } .nv-embed iframe { height: 1800px; } }
+.vcard-hint { display: block; margin-top: 10px; color: var(--muted); font-size: .85rem; line-height: 1.4; }
+.vcard-hint b { color: var(--brand-dark); font-weight: 600; }
